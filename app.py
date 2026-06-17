@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from google import genai
 from google.genai import types
@@ -7,10 +7,8 @@ from google.genai import types
 app = Flask(__name__)
 CORS(app)  # Permite la conexión con tu index.html
 
-# 1. Configuración de la nueva librería de IA con tu clave
-GENAI_API_KEY = "AQ.Ab8RN6LqbcP9XHXSFGZQoT0N8e_MVZ2h8xWe_TnBpO8otgQDdg"
+# 1. Configuración de la librería leyendo la variable de entorno de Render
 client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
-
 # 2. Las instrucciones de la empresa (El "Prompt del Sistema")
 SYSTEM_INSTRUCTION = """
 Sos Lisa IA Guide, la asistente virtual e inteligente de la Peluquería 'Lisa Coiffeur', ubicada en la calle Matheu, Balvanera.
@@ -46,6 +44,17 @@ def chat_endpoint():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/')
+def home():
+    # Le indica a Flask que sirva tu archivo index.html
+    return send_from_directory('.', 'index.html')
+
+@app.route('/<path:path>')
+def serve_static(path):
+    # Esto es vital para que internet encuentre tus fotos adentro de la carpeta img
+    return send_from_directory('.', path)
+
+# EL ARRANQUE DEL SERVIDOR SIEMPRE VA AL FINAL DE TODO
 if __name__ == '__main__':
     from waitress import serve
     # Esto lee el puerto que le da Render automáticamente, o usa el 5000 por defecto
