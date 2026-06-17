@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisa Coiffeur | Plataforma Oficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        html { scroll-behavior: smooth; }
+        
+        /* Estilos sutiles para la tabla de precios */
+        tr:hover { background-color: #FAF8F5; }
+    </style>
+</head>
+<body class="bg-[#FAF8F5] text-[#2C2A29]">
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-50 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-[#EAE5DF]">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="font-serif text-2xl font-bold tracking-wide">LISA COIFFEUR</h1>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wider text-[#6B6661]">
+                <a href="#inicio" class="hover:text-black transition">INICIO</a>
+                <a href="#tienda" class="hover:text-black transition">CATÁLOGO DE PRODUCTOS</a>
+                <a href="#menu-servicios" class="hover:text-black transition">MENÚ Y SERVICIOS</a>
+            </nav>
+            <a href="#ia-guide" class="bg-[#2C2A29] text-white px-5 py-2.5 text-xs font-semibold tracking-widest uppercase hover:bg-[#4A4744] transition">
+                Consultar IA Guide
+            </a>
+        </div>
+    </header>
+
+    <!-- SEGMENTO 1: PRINCIPAL Y MAPA -->
+    <section id="inicio" class="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-12 items-center min-h-[80vh]">
+        <div>
+            <span class="text-xs font-bold tracking-widest uppercase text-[#8C8275] block mb-2">Salón Experiencial — Balvanera</span>
+            <h2 class="font-serif text-4xl md:text-6xl font-light leading-tight mb-6">Reinventando el estilismo femenino.</h2>
+            
+            <!-- Bloque de información con Mapa Interactivo -->
+            <div class="bg-[#F3EFEA] p-6 border border-[#EAE5DF] mb-8 space-y-3 text-sm">
+                <p>📍 <strong>Dirección:</strong> Matheu 54, Balvanera, CABA</p>
+                <p>🕒 <strong>Atención:</strong> Martes a Sábados — 09:00 a 16:00 hs</p>
+                <p>⭐ <strong>Calificación:</strong> 4.7 / 5 estrellas (Más de 130 opiniones reales en Google)</p>
+                
+                <!-- Mapa de Google Embed (Versión Lisa Coiffeur Definitiva) -->
+                <div class="mt-4 border border-[#EAE5DF] shadow-sm">
+                    <iframe src="https://maps.google.com/maps?q=Peluqueria+Lisa+Coiffeur,+Matheu+54,+Balvanera,+CABA&t=&z=17&ie=UTF8&iwloc=&output=embed" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button onclick="pedirTurno()" class="bg-[#2C2A29] text-white text-center px-8 py-4 text-sm font-semibold tracking-widest uppercase hover:bg-[#4A4744] transition shadow-md">
+                    Pedir Turno por WhatsApp
+                </button>
+                <a href="#ia-guide" class="border border-[#2C2A29] text-[#2C2A29] text-center px-8 py-4 text-sm font-semibold tracking-widest uppercase hover:bg-[#2C2A29] hover:text-white transition">
+                    Probar Guía de IA
+                </a>
+            </div>
+        </div>
+        
+        <!-- Módulo de la Guía de IA -->
+        <div id="ia-guide" class="bg-white border border-[#EAE5DF] shadow-xl p-6 md:p-8 flex flex-col h-[500px] justify-between">
+            <div class="border-b border-[#EAE5DF] pb-4 mb-4 flex items-center justify-between">
+                <div>
+                    <h3 class="font-serif text-xl font-medium">Lisa IA Guide 🤖</h3>
+                    <p class="text-xs text-[#8C8275]">Asistente Virtual de Diagnóstico y Turnos</p>
+                </div>
+                <span class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto space-y-4 pr-2 text-sm" id="chat-container">
+                <div class="bg-[#F3EFEA] p-3 max-w-[85%] rounded-r-lg rounded-bl-lg">
+                    <p class="text-xs font-bold text-[#8C8275] mb-1">Lisa IA</p>
+                    ¡Hola! Soy tu guía capilar inteligente. ¿Qué te gustaría lograr hoy en tu pelo?
+                </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-[#EAE5DF] flex gap-2">
+                <input type="text" id="chat-input" placeholder="Escribile a la IA..." class="flex-1 bg-[#FAF8F5] border border-[#EAE5DF] px-4 py-2 text-sm focus:outline-none focus:border-black">
+                <button id="chat-send" class="bg-[#2C2A29] text-white px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-[#4A4744] transition">Enviar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUBSEGMENTO 1: TIENDA DE ARTÍCULOS (ESTILO MERCADOLIBRE) -->
+    <section id="tienda" class="bg-[#F3EFEA] py-20 border-t border-b border-[#EAE5DF]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-[#8C8275] block mb-2">Boutique Capilar</span>
+                    <h3 class="font-serif text-3xl md:text-4xl font-normal">Nuestros Productos</h3>
+                </div>
+            </div>
+
+            <!-- Grid de Productos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="contenedor-productos">
+                <!-- Se inyectan con JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE MENÚ (LA NUEVA TABLA DE PRECIOS REALES) -->
+    <section id="menu-servicios" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="text-center mb-12">
+            <span class="text-xs font-bold tracking-widest uppercase text-[#8C8275] block mb-2">Nuestra Propuesta</span>
+            <h3 class="font-serif text-3xl md:text-4xl font-normal">Menú de Servicios</h3>
+            <p class="text-[#6B6661] font-light mt-2 max-w-md mx-auto">Valores expresados según el largo del cabello. Encontrá tu look ideal.</p>
+        </div>
+
+        <div class="overflow-hidden border border-[#EAE5DF] shadow-md bg-white">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-[#2C2A29] text-white text-xs uppercase tracking-widest">
+                            <th class="p-4 font-semibold">Servicio</th>
+                            <th class="p-4 font-semibold text-center border-l border-[#4A4744]">Pelo Corto</th>
+                            <th class="p-4 font-semibold text-center border-l border-[#4A4744]">Pelo Mediano</th>
+                            <th class="p-4 font-semibold text-center border-l border-[#4A4744]">Pelo Largo</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <!-- Servicios Generales -->
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Corte</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$20.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$20.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$20.000</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Lavado</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$5.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$5.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$5.000</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Secado</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$8.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$10.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$10.000</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Brushing</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$12.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$14.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$16.000</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Brushing con Planchita</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$14.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$16.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$18.000</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Bucles</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$20.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$25.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$30.000</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Trenzas</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">Desde $15.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">Desde $20.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">Desde $25.000</td>
+                        </tr>
+
+                        <!-- Coloración -->
+                        <tr class="bg-[#F3EFEA] border-b border-[#EAE5DF]">
+                            <td colspan="4" class="p-3 font-serif font-bold text-[#8C8275] uppercase text-xs tracking-widest">Coloración y Trabajos Técnicos</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Color Silkey</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$35.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$40.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$45.000</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Color L'Oréal</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$60.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$80.000</td>
+                            <td class="p-4 text-center text-gray-400 border-l border-[#EAE5DF]">—</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Aplicación de Color</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$25.000</td>
+                            <td class="p-4 text-center text-gray-400 border-l border-[#EAE5DF]">—</td>
+                            <td class="p-4 text-center text-gray-400 border-l border-[#EAE5DF]">—</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Reflejos</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$60.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$70.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$80.000</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Mechas</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$70.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$80.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$90.000</td>
+                        </tr>
+
+                        <!-- Tratamientos -->
+                        <tr class="bg-[#F3EFEA] border-b border-[#EAE5DF]">
+                            <td colspan="4" class="p-3 font-serif font-bold text-[#8C8275] uppercase text-xs tracking-widest">Tratamientos y Textura</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Permanente</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$60.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$75.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$88.000</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Alisado</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$60.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$70.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$80.000</td>
+                        </tr>
+                        <tr class="border-b border-[#EAE5DF]">
+                            <td class="p-4 font-bold text-black">Keratina</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$40.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$50.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$60.000</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold text-black">Baño de Crema</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$20.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$25.000</td>
+                            <td class="p-4 text-center text-gray-700 border-l border-[#EAE5DF]">$30.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCRIPTS DE FUNCIONALIDAD -->
+    <script>
+        // ==========================================
+        // 1. CONFIGURACIÓN DE TU WHATSAPP REAL (Actualizado)
+        // ==========================================
+        const NUMERO_WHATSAPP_LOCAL = "5491157316186"; 
+
+        function pedirTurno() {
+            const mensaje = "Hola Lisa Coiffeur! Me gustaría consultar por un turno.";
+            window.open(`https://wa.me/${NUMERO_WHATSAPP_LOCAL}?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }
+
+        function comprarMercadoLibre(nombreProducto, precio, idInput) {
+            const cantidad = document.getElementById(idInput).value;
+            const total = precio * cantidad;
+            const mensaje = `Hola! Quiero hacer una compra:%0A%0A🛍️ *Producto:* ${nombreProducto}%0A📦 *Cantidad:* ${cantidad}%0A💰 *Total:* $${total.toLocaleString('es-AR')}%0A%0A¿Me pasás los datos para abonar?`;
+            
+            window.open(`https://wa.me/${NUMERO_WHATSAPP_LOCAL}?text=${mensaje}`, '_blank');
+        }
+
+        // ==========================================
+        // 2. GENERADOR DEL CATÁLOGO DE PRODUCTOS
+        // ==========================================
+        const contenedorProductos = document.getElementById('contenedor-productos');
+        
+        const tonosSilkey = [
+            "1 - Negro", "2 - Moreno", "3 - Castaño Oscuro", "4 - Castaño Medio", 
+            "5 - Castaño Claro", "6 - Rubio Oscuro", "7 - Rubio Medio", 
+            "8 - Rubio Claro", "9 - Rubio Muy Claro", "10 - Rubio Platinado"
+        ];
+
+        let htmlProductos = '';
+
+        tonosSilkey.forEach((tono, index) => {
+            const numeroTono = index + 1;
+            htmlProductos += `
+                <div class="bg-white border border-[#EAE5DF] p-4 flex flex-col justify-between hover:shadow-lg transition">
+                    <div>
+                        <div class="bg-[#FAF8F5] w-full h-48 mb-4 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=400');"></div>
+                        <span class="text-[10px] bg-[#2C2A29] text-white px-2 py-0.5 uppercase font-bold tracking-wider">Tono ${numeroTono}</span>
+                        <h4 class="font-medium text-sm mt-2 text-black line-clamp-2">Tintura Silkey Policrom - Color ${tono}</h4>
+                        <p class="text-xs text-[#6B6661] mt-2 mb-3">Coloración permanente en crema. Alta cobertura de canas, fijación extrema y brillo luminoso.</p>
+                        
+                        <div class="space-y-2 border-t border-gray-100 pt-3">
+                            <label class="text-xs font-bold text-gray-700">Cantidad a llevar:</label>
+                            <input type="number" id="cant-silkey-${numeroTono}" min="1" value="1" class="w-full border border-gray-300 p-1.5 text-sm outline-none focus:border-black">
+                            <p class="text-[10px] text-gray-500">💳 Medios: Efectivo, Transferencia, Tarjetas.</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-xl font-semibold text-black block">$10.000</span>
+                        <button onclick="comprarMercadoLibre('Tintura Silkey Tono ${numeroTono}', 10000, 'cant-silkey-${numeroTono}')" class="mt-2 block w-full bg-[#2C2A29] text-white text-center py-2 text-xs uppercase font-bold tracking-wider hover:bg-[#4A4744] transition">
+                            Comprar Artículo
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+
+        htmlProductos += `
+            <div class="bg-white border border-[#EAE5DF] p-4 flex flex-col justify-between hover:shadow-lg transition ring-2 ring-black">
+                <div>
+                    <div class="bg-[#FAF8F5] w-full h-48 mb-4 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&q=80&w=400');"></div>
+                    <span class="text-[10px] bg-red-600 text-white px-2 py-0.5 uppercase font-bold tracking-wider">Premium</span>
+                    <h4 class="font-medium text-sm mt-2 text-black line-clamp-2">Plancha Babyliss Pro Nano Titanium</h4>
+                    <p class="text-xs text-[#6B6661] mt-2 mb-3">Plancha profesional alisadora. Placas de titanio ultra lisas, ideal para tratamientos de alisado y keratina.</p>
+                    
+                    <div class="space-y-2 border-t border-gray-100 pt-3">
+                        <label class="text-xs font-bold text-gray-700">Cantidad a llevar:</label>
+                        <input type="number" id="cant-babyliss" min="1" value="1" class="w-full border border-gray-300 p-1.5 text-sm outline-none focus:border-black">
+                        <p class="text-[10px] text-gray-500">💳 Medios: Efectivo, Transferencia, Tarjetas.</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <span class="text-xl font-semibold text-black block">$150.000</span>
+                    <button onclick="comprarMercadoLibre('Plancha Babyliss Pro', 150000, 'cant-babyliss')" class="mt-2 block w-full bg-[#2C2A29] text-white text-center py-2 text-xs uppercase font-bold tracking-wider hover:bg-[#4A4744] transition">
+                        Comprar Artículo
+                    </button>
+                </div>
+            </div>
+        `;
+
+        contenedorProductos.innerHTML = htmlProductos;
+
+        // ==========================================
+        // 3. IA GUIDE (CÓDIGO DE PYTHON INTACTO)
+        // ==========================================
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const chatContainer = document.getElementById('chat-container');
+
+        async function enviarMensajeA_IA() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            mostrarMensaje(text, 'Cliente', 'bg-[#2C2A29] text-white ml-auto rounded-l-lg rounded-br-lg');
+            chatInput.value = '';
+            chatInput.disabled = true;
+            chatSend.disabled = true;
+
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = "bg-[#F3EFEA] p-3 max-w-[85%] rounded-r-lg rounded-bl-lg";
+            loadingDiv.innerHTML = `<div class="w-full"><p class="text-xs font-bold text-[#8C8275] mb-1">Lisa IA</p><div class="flex items-center space-x-1"><span class="text-xs text-[#6B6661] italic mr-1">Analizando tu pelo</span><span class="h-1 w-1 bg-[#8C8275] rounded-full animate-bounce" style="animation-delay: 0ms"></span><span class="h-1 w-1 bg-[#8C8275] rounded-full animate-bounce" style="animation-delay: 150ms"></span><span class="h-1 w-1 bg-[#8C8275] rounded-full animate-bounce" style="animation-delay: 300ms"></span></div></div>`;
+            chatContainer.appendChild(loadingDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            try {
+                const respuestaServidor = await fetch('http://127.0.0.1:5000/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+                const data = await respuestaServidor.json();
+                loadingDiv.remove();
+                
+                if (!respuestaServidor.ok) {
+                    mostrarMensaje(`⚠️ Error: ${data.error}`, 'Lisa IA', 'bg-red-50 text-red-800 rounded-r-lg rounded-bl-lg');
+                    return;
+                }
+                mostrarMensaje(data.response, 'Lisa IA', 'bg-[#F3EFEA] rounded-r-lg rounded-bl-lg');
+            } catch (error) {
+                loadingDiv.remove();
+                mostrarMensaje('📍 Error de conexión con Python.', 'Lisa IA', 'bg-red-50 text-red-800 rounded-r-lg rounded-bl-lg');
+            } finally {
+                chatInput.disabled = false;
+                chatSend.disabled = false;
+                chatInput.focus();
+            }
+        }
+
+        function mostrarMensaje(texto, remitente, clasesEstilo) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `${clasesEstilo} p-3 max-w-[85%]`;
+            const subtextClass = remitente === 'Cliente' ? 'text-gray-300' : 'text-[#8C8275]';
+            msgDiv.innerHTML = `<p class="text-xs font-bold ${subtextClass} mb-1">${remitente}</p>${texto}`;
+            chatContainer.appendChild(msgDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        chatSend.addEventListener('click', enviarMensajeA_IA);
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') enviarMensajeA_IA(); });
+    </script>
+</body>
+</html>
