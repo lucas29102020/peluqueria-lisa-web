@@ -7,7 +7,8 @@ from google.genai import types
 app = Flask(__name__)
 CORS(app)  # Permite la conexión con tu index.html
 
-# 1. Configuración de la librería leyendo la variable de entorno
+# 1. Configuración de la nueva librería de IA con tu clave
+GENAI_API_KEY = "AQ.Ab8RN6LqbcP9XHXSFGZQoT0N8e_MVZ2h8xWe_TnBpO8otgQDdg"
 client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 # 2. Las instrucciones de la empresa (El "Prompt del Sistema")
@@ -46,5 +47,8 @@ def chat_endpoint():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    # El servidor corre localmente en el puerto 5000
-    app.run(port=5000, debug=True)
+    from waitress import serve
+    # Esto lee el puerto que le da Render automáticamente, o usa el 5000 por defecto
+    port = int(os.environ.get("PORT", 5000))
+    print(f"Servidor web iniciado en el puerto {port}")
+    serve(app, host='0.0.0.0', port=port)
